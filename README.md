@@ -1,26 +1,54 @@
 # Computer Graphics — Task 2
 
-Вторая практическая работа по компьютерной графике на C/C++.
+> Учебная задача на C с отдельными модулями сортировки и поиска и автоматическими тестами.
 
-## О проекте
+## Реализованные модули
 
-Репозиторий содержит отдельное задание с исходным кодом и инфраструктурой сборки. Проект является продолжением практики по компьютерной графике.
+CMake собирает статическую библиотеку:
 
-## Стек
+`edu_sort_and_search`
 
-- C / C++
-- CMake
-- тестирование
-- GitHub
+из двух исходников:
 
-## Рекомендации по сборке
+- `src/edu_sort.c` — операции сортировки;
+- `src/edu_search.c` — операции поиска.
+
+Публичные заголовки находятся в `include/`.
+
+## Тестирование
+
+Проект использует **Criterion 2.4.2** и CTest.
+
+В сборку включены строгие предупреждения:
+
+```text
+-Wall -Wextra -pedantic -Werror
+```
+
+и sanitizers:
+
+- AddressSanitizer;
+- LeakSanitizer;
+- UndefinedBehaviorSanitizer.
+
+## Сборка
 
 ```bash
-cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
+cmake -S . -B build
 cmake --build build
-ctest --test-dir build --verbose
+ctest --test-dir build --output-on-failure
+```
+
+## Структура
+
+```text
+include/   # заголовочные файлы
+src/       # сортировка и поиск
+test/      # тесты
+external/  # Criterion
+CMakeLists.txt
 ```
 
 ## Статус
 
-🟢 Учебная работа.
+🎓 Учебный C-проект с тестированием.
